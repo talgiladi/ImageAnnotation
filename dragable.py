@@ -17,23 +17,21 @@ dragging = False
 ix, iy = -1, -1
 dx, dy = 0, 0  # Difference for moving the box
 box = None
-angle = 0
 
 def draw_rectangle(event, x, y, flags, param):
-    global ix, iy, drawing, img, img_copy, box, dragging, dx, dy, angle
+    global ix, iy, drawing, img, img_copy, box, dragging, dx, dy
 
     # When user clicks to start drawing or dragging
     if event == cv2.EVENT_LBUTTONDOWN:
-        if box is not None and len(box) == 4:
-            rect = cv2.minAreaRect(np.array(box))
-            box_points = cv2.boxPoints(rect)
-            box_points = np.int32(box_points)
-            if cv2.pointPolygonTest(box_points, (x, y), False) >= 0:
+        if box is not None:
+            # Check if click is inside the existing box to allow dragging
+            x1, y1, x2, y2 = box
+            if x1 < x < x2 and y1 < y < y2:
                 dragging = True
-                dx = x - box[0][0]
-                dy = y - box[0][1]
+                dx = x - x1
+                dy = y - y1
             else:
-                # Start drawing a new rotated rectangle
+                # Start drawing a new box
                 drawing = True
                 ix, iy = x, y
         else:
@@ -44,13 +42,7 @@ def draw_rectangle(event, x, y, flags, param):
     elif event == cv2.EVENT_MOUSEMOVE:
         if drawing:
             img = img_copy.copy()
-            width = abs(x - ix)
-            height = abs(y - iy)
-            center = ((ix + x) // 2, (iy + y) // 2)
-            box = ((center[0], center[1]), (width, height), angle)
-            points = cv2.boxPoints(box)
-            points = np.int32(points)
-            cv2.drawContours(img, [points], 0, (0, 255, 0), 2)
+            cv2.rectangle(img, (ix, iy), (x, y), (0, 255, 0), 2)
         elif dragging and box:
             # Move the selected bounding box
             x1, y1, x2, y2 = box
@@ -62,14 +54,13 @@ def draw_rectangle(event, x, y, flags, param):
 
     elif event == cv2.EVENT_LBUTTONUP:
         if drawing:
+            # Finalize the box coordinates
+            x1, y1 = min(ix, x), min(iy, y)
+            x2, y2 = max(ix, x), max(iy, y)
+            box = (x1, y1, x2, y2)
             drawing = False
-            width = abs(x - ix)
-            height = abs(y - iy)
-            center = ((ix + x) // 2, (iy + y) // 2)
-            box = (center[0], center[1], width, height, angle)
-            points = cv2.boxPoints(box)
-            points = np.int32(points)
-            cv2.drawContours(img, [points], 0, (0, 255, 0), 2)
+            img = img_copy.copy()
+            draw_box(img)
         dragging = False
 
 def draw_box(image):
@@ -78,7 +69,7 @@ def draw_box(image):
         cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
 def convert_to_yolo_format(box, img_width, img_height):
-    x1, y1, x2, y2, angle = box
+    x1, y1, x2, y2 = box
     x_center = ((x1 + x2) / 2) / img_width
     y_center = ((y1 + y2) / 2) / img_height
     width = (x2 - x1) / img_width
@@ -124,7 +115,6 @@ for image_path in image_paths:
             break
         elif key == ord('r'):  # Reset
             box = None
-            angle = (angle + 15) % 360
             img = img_copy.copy()
             print("Reset box.")
         elif key == 27:  # ESC to exit

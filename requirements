@@ -1,1 +1,4 @@
+I've run this code on windows machine using VS Code, so 
+I needed to run the following command from the VS Code terminal first:
+
 py -m pip install opencv-python
