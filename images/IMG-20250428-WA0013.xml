@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>IMG-20250428-WA0013.jpg</filename>
+	<path>C:\Users\write\OneDrive\Documents\Visual Studio Code\ImageAnnotation\images\IMG-20250428-WA0013.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>2000</width>
+		<height>1500</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>l</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>206</xmin>
+			<ymin>993</ymin>
+			<xmax>1350</xmax>
+			<ymax>1112</ymax>
+		</bndbox>
+	</object>
+</annotation>

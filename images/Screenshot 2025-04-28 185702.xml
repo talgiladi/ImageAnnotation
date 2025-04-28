@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>Screenshot 2025-04-28 185702.png</filename>
+	<path>C:\Users\write\OneDrive\Documents\Visual Studio Code\ImageAnnotation\images\Screenshot 2025-04-28 185702.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>680</width>
+		<height>558</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>l</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>436</xmin>
+			<ymin>23</ymin>
+			<xmax>672</xmax>
+			<ymax>384</ymax>
+		</bndbox>
+	</object>
+</annotation>
