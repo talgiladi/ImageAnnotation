@@ -66,11 +66,11 @@ def convert_xml_to_yolo(xml_file):
         class_name = obj.find('name').text
         
         # Skip classes not in our mapping
-        if class_name not in class_mapping:
-            print(f"Warning: Class '{class_name}' not found in mapping. Skipping.")
-            continue
+        # if class_name not in class_mapping:
+        #     print(f"Warning: Class '{class_name}' not found in mapping. Skipping.")
+        #     continue
             
-        class_id = class_mapping[class_name]
+        # class_id = class_mapping[class_name]
         
         # Get bounding box
         bbox = obj.find('bndbox')

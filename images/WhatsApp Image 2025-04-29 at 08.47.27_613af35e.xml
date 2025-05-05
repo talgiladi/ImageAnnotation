@@ -1,0 +1,26 @@
+<annotation>
+	<folder>images</folder>
+	<filename>WhatsApp Image 2025-04-29 at 08.47.27_613af35e.jpg</filename>
+	<path>C:\Users\write\OneDrive\Documents\Visual Studio Code\ImageAnnotation\images\WhatsApp Image 2025-04-29 at 08.47.27_613af35e.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1500</width>
+		<height>2000</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>1</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>439</xmin>
+			<ymin>1434</ymin>
+			<xmax>802</xmax>
+			<ymax>1543</ymax>
+		</bndbox>
+	</object>
+</annotation>
